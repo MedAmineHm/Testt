@@ -1,0 +1,41 @@
+<h2>Ajouter une vidéo</h2>
+
+<form #videoForm="ngForm" (ngSubmit)="onSubmit(videoForm)">
+  <div class="form-group">
+    <label for="id">ID*</label>
+    <input type="number" class="form-control" id="id" name="id" ngModel required>
+  </div>
+  <div class="form-group">
+    <label for="title">Titre*</label>
+    <input type="text" class="form-control" id="title" name="title" ngModel required pattern="[A-Z][a-zA-Z]*">
+    <div *ngIf="videoForm.controls.title.invalid && (videoForm.controls.title.dirty || videoForm.controls.title.touched)"
+         class="alert alert-danger">
+      <div *ngIf="videoForm.controls.title.errors.required">
+        Le champ titre est obligatoire.
+      </div>
+      <div *ngIf="videoForm.controls.title.errors.pattern">
+        Le titre doit commencer par une lettre majuscule.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="genre">Genre*</label>
+    <select class="form-control" id="genre" name="genre" ngModel required>
+      <option value="">Choisir un genre</option>
+      <option value="action">Action</option>
+      <option value="documentaire">Documentaire</option>
+      <option value="comédie">Comédie</option>
+    </select>
+    <div *ngIf="videoForm.controls.genre.invalid && (videoForm.controls.genre.dirty || videoForm.controls.genre.touched)"
+         class="alert alert-danger">
+      <div *ngIf="videoForm.controls.genre.errors.required">
+        Le champ genre est obligatoire.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="public">Public</label>
+    <input type="checkbox" class="form-control" id="public" name="public" ngModel>
+  </div>
+  <div class="form-group">
+    <label for="nbrShared">Nombre de partages</label>
